@@ -59,6 +59,7 @@ RUN apt-get update && \
         libsndfile-dev \
         supervisor \
         flac && \
+    apt-get install python3-apt && \
     add-apt-repository -y ppa:deadsnakes/ppa && \
     apt-get update && \
     DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends \
@@ -76,7 +77,8 @@ RUN apt-get update && \
 #RUN cd /opt/spleeter && poetry update && poetry install 
 
 RUN cd /opt && git clone https://github.com/ghuawhu/end-to-end-synthetic-speech-detection.git && \
-    /bin/bash -c "virtualenv -p python3 inaSpeechSegEnv && \
+    pip install virtualenv && \
+	/bin/bash -c "virtualenv -p python3 inaSpeechSegEnv && \
     source inaSpeechSegEnv/bin/activate && \
     python3 -m pip install tensorflow-gpu && \
     python3 -m pip install tensorflow && \
